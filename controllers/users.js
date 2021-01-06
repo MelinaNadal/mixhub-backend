@@ -3,11 +3,6 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
 
-router.post('/signup', usersCtrl.signup);
-router.post('/login', usersCtrl.login);
-
-
-
 async function signup(req, res) {
   const user = new User(req.body);
   try {
