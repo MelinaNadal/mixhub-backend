@@ -9,11 +9,15 @@ async function signup(req, res) {
     await user.save();
     // TODO: Send back a JWT instead of the user
     res.json(user);
+    const token = createJWT(user);
+    res.json({ token, user });
   } catch (err) {
     // Probably a duplicate email
+    console.log(err);
     res.status(400).json(err);
   }
 }
+
 async function login(req, res) {
   try {
     const user = await User.findOne({email: req.body.email});
@@ -21,7 +25,7 @@ async function login(req, res) {
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
-        res.json({token});
+        res.json({token, user});
       } else {
         return res.status(401).json({err: 'bad credentials'});
       }
