@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
-// TODO: need to create a .env file with connection URI
-mongoose.connect('mongodb://localhost/mixhub', { 
-
-// to do for deployment  process.env.DATABASE_URL
+mongoose.connect(process.env.DATABASE_URL, { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true 
